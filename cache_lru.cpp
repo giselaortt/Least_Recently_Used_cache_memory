@@ -5,12 +5,16 @@
 #include <string>
 #include <utility>
 
+
 using namespace std;
+
+
+typedef pair< list<int>::iterator, string > Node;
 
 
 class LRU{
     private:
-    unordered_map<int, pair< list<int>::iterator, string > > hash;
+    unordered_map<int, Node > hash;
     list<int> orderOfUse;
     const int max = 9;
 
@@ -44,9 +48,9 @@ class LRU{
     void remove( int key ){
         if( !hash.count(key) )
             return;
-        list<int>::iterator node = hash[key].first;
+        list<int>::iterator node_pointer = hash[key].first;
         hash.erase( key );
-        orderOfUse.erase( node );
+        orderOfUse.erase( node_pointer );
     }
 
 
